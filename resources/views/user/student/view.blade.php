@@ -18,5 +18,8 @@
     </head>
     <body class="">
         <div class="">Hello From {{env('APP_NAME')}}</div>
+        <div>
+           {!! $student !!}
+        </div>
     </body>
 </html>

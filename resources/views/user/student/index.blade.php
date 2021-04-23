@@ -18,5 +18,15 @@
     </head>
     <body class="">
         <div class="">Hello From {{env('APP_NAME')}}</div>
+        <div>
+            @foreach ($students as $student)
+                <div>
+                    @can('viewAny', App\Models\Student::class)
+                    {{$student->firstname}} <a href="{{ route('students.show', [$student->id]) }}"> Click</a>
+                    @endcan
+                    {{$student->home_address}}
+                </div>
+            @endforeach
+        </div>
     </body>
 </html>
