@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function __contruct()
+    {
+        $this->authorizeResource(User::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+
+        return view('user.users.index', [
+            'users' => $users
+        ]);
     }
 
     /**
@@ -24,7 +34,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        echo "This is create";
     }
 
     /**
@@ -35,7 +45,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        echo "This is store";
     }
 
     /**
@@ -44,9 +54,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        echo "This is show";
     }
 
     /**
@@ -57,7 +67,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        echo "This is edit";
     }
 
     /**
@@ -69,7 +79,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        echo "This is update";
     }
 
     /**
@@ -80,6 +90,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        echo "this is destroy";
     }
 }

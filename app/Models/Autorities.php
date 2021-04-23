@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FeatureAuthorize extends Model
+class Autorities extends Model
 {
     use HasFactory;
 
@@ -13,6 +13,9 @@ class FeatureAuthorize extends Model
     const GUARDIAN = 'guardian';
     const STUDENT = 'student';
 
+    // protected $table = 'autorities';
+
+    public $incrementing = false;
     /**
      * The attributes that are mass assignable.
      *
@@ -27,4 +30,9 @@ class FeatureAuthorize extends Model
         'update',
         'delete'
     ];
+
+    public function user_authority()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

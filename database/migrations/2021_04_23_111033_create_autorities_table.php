@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFeatureAuthorizesTable extends Migration
+class CreateAutoritiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class CreateFeatureAuthorizesTable extends Migration
      */
     public function up()
     {
-        Schema::create('feature_authorizes', function (Blueprint $table) {
+        Schema::create('autorities', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
+                ->references('id')->on('users')
+                ->onDelete('cascade');
             $table->string('feature');
             $table->boolean('viewAny')->default(false);
             $table->boolean('view')->default(false);
@@ -33,6 +36,6 @@ class CreateFeatureAuthorizesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('feature_authorizes');
+        Schema::dropIfExists('autorities');
     }
 }

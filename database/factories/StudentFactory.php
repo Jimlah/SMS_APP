@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Student;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class StudentFactory extends Factory
 {
@@ -22,13 +23,13 @@ class StudentFactory extends Factory
     public function definition()
     {
         return [
-            'firstname' => $this->faker()->firstname(),
-            'lastname' => $this->faker()->lastname(),
-            'middlename' => $this->faker()->firstnam(),
-            'date_of_birth' => $this->faker()->date(),
-            'state_of_origin' => $this->faker()->state(),
-            'nationality' => $this->faker()->country(),
-            'home_address' => $this->faker()->address()
+            'firstname' => 'Abdullahi',
+            'lastname' => 'Jimoh',
+            'middlename' => 'Temidayo',
+            'date_of_birth' => now(),
+            'state_of_origin' => 'Oyo',
+            'nationality' => 'Nigeria',
+            'home_address' => '24, Amina Way'
         ];
     }
 }
