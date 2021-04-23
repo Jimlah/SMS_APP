@@ -42,8 +42,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function authorize()
+    public function authorize($feature)
     {
-        return $this->hasMany(Autorities::class)->get();
+        return $this->hasMany(Autorities::class)
+                    ->where('feature', $feature)
+                    ->get()
+                    ->first();
     }
 }

@@ -19,9 +19,9 @@ class StudentPolicy
      */
     public function before(User $user, $ability)
     {
-        if ($user->id === 1) {
-            return true;
-        }
+        // if ($user->id === 1) {
+        //     return true;
+        // }
     }
 
     /**
@@ -32,7 +32,11 @@ class StudentPolicy
      */
     public function viewAny(User $user)
     {
-        return true;
+        $auth = $user->authorize('student')->viewAny;
+        if($auth === 1){
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -44,7 +48,11 @@ class StudentPolicy
      */
     public function view(User $user, Student $student)
     {
-        return true;
+        $auth = $user->authorize('student')->view;
+        if($auth === 1){
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -55,7 +63,11 @@ class StudentPolicy
      */
     public function create(User $user)
     {
-        return true;
+        $auth = $user->authorize('student')->create;
+        if($auth === 1){
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -67,7 +79,11 @@ class StudentPolicy
      */
     public function update(User $user, Student $student)
     {
-        return TRUE;
+        $auth = $user->authorize('student')->update;
+        if($auth === 1){
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -79,7 +95,11 @@ class StudentPolicy
      */
     public function delete(User $user, Student $student)
     {
-        return true;
+        $auth = $user->authorize('student')->delete;
+        if($auth === 1){
+            return true;
+        }
+        return false;
     }
 
     /**
