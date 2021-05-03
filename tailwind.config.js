@@ -1,4 +1,5 @@
 module.exports = {
+  mode: 'jit',
   purge: ['./resources/**/*.{js,vue,blade.php}'],
   darkMode: 'class', // or 'media' or 'class'
   theme: {
