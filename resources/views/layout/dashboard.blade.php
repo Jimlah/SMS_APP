@@ -122,7 +122,7 @@
                     </ul>
                 </div>
 
-                <a href="#"
+                <a href="/logout"
                     class="flex items-center justify-start space-x-3 text-sm font-semibold active:text-purple-900 hover:text-purple-900">
                     <span>
                         <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -138,7 +138,7 @@
             <div class="relative flex flex-grow dark:text-white">
                 <div class="absolute flex flex-col flex-1 w-full h-full p-5 space-y-5 overflow-y-scroll">
 
-                    <div class="relative flex justify-center text-lg ">
+                    <div class="relative flex justify-center text-lg">
                         <div class="absolute flex flex-col space-y-2">
                             @include('components.notification')
                         </div>

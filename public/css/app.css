@@ -683,6 +683,9 @@ video {
 .justify-start {
 	justify-content: flex-start;
 }
+.justify-end {
+	justify-content: flex-end;
+}
 .gap-5 {
 	gap: 1.25rem;
 }
