@@ -45,7 +45,8 @@ class Login extends Controller
             return redirect()->intended(route('students.index'));
         }
 
-        return redirect(route('login.index'));
+        return redirect(route('login.index'))
+                ->with('success', 'You have Successfully Logged In');
     }
 
     /**

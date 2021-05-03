@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StudentsRequest;
 use App\Models\Student;
+use Illuminate\Support\Facades\Redirect;
 
 class StudentController extends Controller
 {
@@ -34,7 +35,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        die("just Create");
+        return view('user.student.create');
     }
 
     /**
@@ -43,9 +44,12 @@ class StudentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StudentsRequest $request)
     {
-        //
+        Student::create($request->except('_token'));
+
+        return redirect()->back()
+                ->with('success', 'You have Successfully added a new Student');
     }
 
     /**
@@ -69,7 +73,9 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        die('Edit me');
+        return view('user.student.edit', [
+            "students" => $student
+        ]);
     }
 
     /**
@@ -81,7 +87,12 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        //
+        $student->update(
+            $request->except(['_method', '_token'])
+        );
+        
+        return redirect()->back()
+                        ->with('success', 'You have update the student data');
     }
 
     /**

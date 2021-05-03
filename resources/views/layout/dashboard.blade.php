@@ -103,6 +103,22 @@
                                 <span>Users</span>
                             </a>
                         </li>
+                        @can('viewAny', App\Models\Student::class)
+                            <li class="my-2">
+                                <a href="{{ route('students.index') }}"
+                                    class="flex justify-start space-x-3 active:text-purple-900 hover:text-purple-900">
+                                    <span>
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
+                                            </path>
+                                        </svg>
+                                    </span>
+                                    <span>Students</span>
+                                </a>
+                            </li>
+                        @endcan
                     </ul>
                 </div>
 
@@ -122,7 +138,13 @@
             <div class="relative flex flex-grow dark:text-white">
                 <div class="absolute flex flex-col flex-1 w-full h-full p-5 space-y-5 overflow-y-scroll">
 
-                   @yield('body')
+                    <div class="relative flex justify-center text-lg ">
+                        <div class="absolute flex flex-col space-y-2">
+                            @include('components.notification')
+                        </div>
+                    </div>
+
+                    @yield('body')
                 </div>
 
             </div>
