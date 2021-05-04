@@ -31,7 +31,7 @@
             <table class="table w-full text-base font-normal border-collapse table-auto">
                 <thead class="font-semibold text-left">
                     <tr class="">
-                        <div class="block lg:hidden">Students</div>
+                        <div class="block mb-5 text-lg font-bold lg:hidden">Students</div>
                         <th class="hidden px-2 py-2 border-b border-gray-500 border-opacity-50 lg:table-cell">ID</th>
                         <th class="hidden px-2 py-2 border-b border-gray-500 border-opacity-50 lg:table-cell">Firstname</th>
                         <th class="hidden px-2 py-2 border-b border-gray-500 border-opacity-50 lg:table-cell">Lastname</th>

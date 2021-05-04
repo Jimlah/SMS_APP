@@ -11,8 +11,8 @@
                 </span>
                 @csrf
                 <div class="w-full pt-3">
-                    <div class="grid grid-cols-2 gap-5 text-black dark:text-white ">
-                        <div class="flex justify-start w-full col-span-1 md:flex-col">
+                    <div class="grid grid-cols-1 gap-5 text-black md:grid-cols-2 dark:text-white">
+                        <div class="flex flex-col justify-start w-full col-span-1">
                             <label for="firstname" class="text-sm font-bold ">First Name</label>
                             <input type="text" name="firstname" id="firstname" value="{{$students->firstname ?? ""}}"
                                 class="w-full p-3 bg-gray-100 border border-gray-400 focus:bg-transparent dark:bg-gray-700">
@@ -51,7 +51,7 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-2 gap-5 text-black dark:text-white ">
+            <div class="grid grid-cols-1 gap-5 text-black lg:grid-cols-2 dark:text-white">
                 <div class="flex justify-start w-full col-span-1 col-start-2 space-x-2">
                     <button type="reset" class="flex-none p-2 bg-transparent border-2 border-purple-500">Reset</button>
                     <button type="submit" class="flex-grow p-2 text-white bg-purple-900 hover:bg-opacity-50">Submit</button>
