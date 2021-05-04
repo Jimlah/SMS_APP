@@ -12,6 +12,7 @@ class Autorities extends Model
     const TEACHER = 'teacher';
     const GUARDIAN = 'guardian';
     const STUDENT = 'student';
+    const ADMIN  = "admin";
 
     // protected $table = 'autorities';
 

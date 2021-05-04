@@ -20,11 +20,19 @@ class DatabaseSeeder extends Seeder
     {
         $faker = Factory::create();
 
+        User::create([
+            'username' => $faker->userName(),
+            'email' => $faker->unique()->email(),
+            'password' => "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+            'roles' => User::ROLE_SUPER_ADMIN
+        ]);
+
         for ($i=0; $i < 10; $i++) { 
             User::create([
                 'username' => $faker->userName(),
                 'email' => $faker->unique()->email(),
-                'password' => "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi"
+                'password' => "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                'roles' => User::ROLE_ADMIN
             ]);
         }
 
@@ -34,6 +42,7 @@ class DatabaseSeeder extends Seeder
                 'firstname' => $faker->firstName(),
                 'lastname' => $faker->lastName(),
                 'middlename' => $faker->firstName(),
+                'email' => $faker->email(),
                 'date_of_birth' => $faker->date(),
                 'state_of_origin' => $faker->state,
                 'nationality' => $faker->country,
@@ -47,6 +56,7 @@ class DatabaseSeeder extends Seeder
                 'firstname' => $faker->firstName(),
                 'lastname' => $faker->lastName(),
                 'middlename' => $faker->firstName(),
+                'email' => $faker->email(),
                 'date_of_birth' => $faker->date(),
                 'phone_number' => $faker->phoneNumber
             ]);

@@ -15,10 +15,12 @@ class CreateStudentsTable extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('firstname');
             $table->string('lastname');
             $table->string('middlename');
-            $table->string('date_of_birth'); //Requires change
+            $table->string('email')->nullable();
+            $table->dateTime('date_of_birth'); //Requires change
             $table->string('state_of_origin');
             $table->string('nationality');
             $table->string('home_address');

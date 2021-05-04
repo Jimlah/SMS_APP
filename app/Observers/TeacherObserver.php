@@ -16,12 +16,15 @@ class TeacherObserver
      */
     public function created(Teacher $teacher)
     {
-        $faker = Factory::create();
-        User::create([
+        $user = User::create([
             'username' => $teacher->phone_number,
-            'email' => $faker->unique()->email,
-            'password' => "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi"
+            'email' => $teacher->email,
+            'password' => "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+            'roles' => User::ROLE_TEACHER
         ]);
+
+        $teacher->user_id = $user->id;
+        $teacher->save();
     }
 
     /**
