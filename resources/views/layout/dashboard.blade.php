@@ -61,10 +61,19 @@
                 </div>
             </div>
         </div>
-        <div class="flex flex-auto">
-            <div class="flex flex-col justify-between flex-none px-5 py-5 text-gray-400 bg-white dark:bg-gray-900">
-                <div class="flex flex-col space-y-2 divide-y divide-gray-400 divide-opacity-50">
-                    <div class="flex flex-col items-center justify-center space-y-0.5">
+        <div class="relative flex flex-auto" x-data="openNav()">
+            <div class="flex-col justify-between flex-none px-5 py-5 text-gray-400 bg-white dark:bg-gray-900 lg:flex"
+                :class="{'hidden': isOpen() == false, 'absolute lg:relative h-full flex z-50': isOpen() == true}">
+                <div class="flex flex-col space-y-2 divide-opacity-50">
+                    <button class="self-end lg:hidden" x-on:click="close">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                    <div
+                        class="flex flex-col items-center justify-center space-y-0.5 border-b border-gray-700 border-opacity-50 pb-2">
                         <img class="rounded-full h-14 w-14" src="{{ asset('test/user.jpg') }}" alt="">
                         <span class="text-xs font-medium"> Admin </span>
                     </div>
@@ -130,9 +139,17 @@
                 </a>
             </div>
             <div class="relative flex flex-grow dark:text-white">
-                <div class="absolute flex flex-col flex-1 w-full h-full p-5 space-y-5 overflow-y-scroll">
+                <div class="absolute flex flex-col flex-1 w-full h-full p-5 overflow-y-scroll">
 
-                    <div class="relative flex justify-center text-lg">
+                    <button class="self-start lg:hidden" x-on:click="open">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+
+                    <div class="relative flex justify-center mt-2 text-lg">
                         <div class="absolute flex flex-col space-y-2">
                             @include('components.notification')
                         </div>
@@ -172,6 +189,22 @@
                 },
                 change() {
                     return this.show
+                }
+            }
+        }
+
+        function openNav() {
+            return {
+                nav: false,
+                open() {
+                    console.log(this.nav)
+                    this.nav = true
+                },
+                close() {
+                    this.nav = false
+                },
+                isOpen() {
+                    return this.nav
                 }
             }
         }
