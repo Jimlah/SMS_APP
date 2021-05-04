@@ -5,11 +5,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>SMS</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
     <style>
         body {
             font-family: 'Nunito', sans-serif;
@@ -23,9 +24,9 @@
         <div
             class="flex items-center justify-between flex-none px-5 py-2 text-sm text-gray-400 bg-white dark:bg-gray-900">
             <div>Logo</div>
-            <div class="flex items-center space-x-2">
-                <button id="switchTheme" class="border-none">
-                    <span id="sun" class="">
+            <div class="flex items-center space-x-2" x-data="changeTheme()">
+                <button id="switchTheme" class="border-none" x-on:click="open">
+                    <span id="sun" class="" :class="{ 'hidden': change() === true }">
                         <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -33,7 +34,7 @@
                             </path>
                         </svg>
                     </span>
-                    <span id="moon" class="hidden">
+                    <span id="moon" class="" :class="{ 'hidden': change() === false }">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -54,16 +55,9 @@
                     <img src="{{ asset('test/user.jpg') }}" alt="Abdullahi" class="w-6 h-6 rounded-full">
                 </button>
                 <div class="">
-                    <button class="flex items-center space-x-1">
+                    <a href="" class="flex items-center space-x-1">
                         <span>Abdullahi JImoh</span>
-                        <span>
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7">
-                                </path>
-                            </svg>
-                        </span>
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -168,6 +162,18 @@
             document.querySelector('html').classList.add('dark')
         } else if (localStorage.theme === 'dark') {
             document.querySelector('html').classList.add('dark')
+        }
+
+        function changeTheme() {
+            return {
+                show: false,
+                open() {
+                    this.show = !this.show
+                },
+                change() {
+                    return this.show
+                }
+            }
         }
 
     </script>
