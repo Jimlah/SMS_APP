@@ -16,7 +16,8 @@
                         </svg>
                     </button>
                 </form>
-                <a href="{{ route('students.create') }}" class="flex items-center justify-center px-2 py-1 bg-purple-900 rounded-md hover:bg-purple-700">
+                <a href="{{ route('students.create') }}"
+                    class="flex items-center justify-center px-2 py-1 bg-purple-900 rounded-md hover:bg-purple-700">
                     <span>
                         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
@@ -45,47 +46,28 @@
                     @forelse ($students as $student)
                         <tr>
                             <td class="px-2 py-2 border-b border-gray-500 border-opacity-50">{{ $student->id }}</td>
-                            <td class="px-2 py-2 border-b border-gray-500 border-opacity-50">{{ $student->firstname }}</td>
-                            <td class="px-2 py-2 border-b border-gray-500 border-opacity-50">{{ $student->lastname }}</td>
-                            <td class="px-2 py-2 border-b border-gray-500 border-opacity-50">{{ $student->middlename }}</td>
-                            <td class="px-2 py-2 border-b border-gray-500 border-opacity-50">{{ \Carbon\Carbon::parse($student->date_of_birth)->format('Y-m-d') ?? ""}}
+                            <td class="px-2 py-2 border-b border-gray-500 border-opacity-50">{{ $student->firstname }}
                             </td>
-                            <td class="px-2 py-2 border-b border-gray-500 border-opacity-50">{{ $student->state_of_origin }}
+                            <td class="px-2 py-2 border-b border-gray-500 border-opacity-50">{{ $student->lastname }}</td>
+                            <td class="px-2 py-2 border-b border-gray-500 border-opacity-50">{{ $student->middlename }}
+                            </td>
+                            <td class="px-2 py-2 border-b border-gray-500 border-opacity-50">
+                                {{ \Carbon\Carbon::parse($student->date_of_birth)->format('Y-m-d') ?? '' }}
+                            </td>
+                            <td class="px-2 py-2 border-b border-gray-500 border-opacity-50">
+                                {{ $student->state_of_origin }}
                             </td>
                             <td class="px-2 py-2 border-b border-gray-500 border-opacity-50">{{ $student->nationality }}
                             </td>
                             <td class="px-2 py-2 border-b border-gray-500 border-opacity-50">{{ $student->home_address }}
                             </td>
                             <td class="px-2 py-2 border-b border-gray-500 border-opacity-50">
-                                <span class="flex items-center justify-start space-x-2">
-                                    <a href="{{ route('students.show', [$student->id]) }}" class="p-1 bg-green-500">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
-                                            </path>
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                            </path>
-                                        </svg>
-                                    </a>
-                                    <a href="{{ route('students.edit', [$student->id]) }}" class="p-1 bg-blue-500">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
-                                            </path>
-                                        </svg>
-                                    </a>
-                                    <button class="p-1 bg-red-500">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
-                                            </path>
-                                        </svg>
-                                    </button>
-                                </span>
+
+                                <x-action viewOne="{{ route('students.show', [$student->id]) }}"
+                                    edit="{{ route('students.edit', [$student->id]) }}"
+                                    delete="{{ route('students.destroy', [$student->id]) }}" >
+                                </x-action>
+
                             </td>
                         </tr>
                     @empty
@@ -103,7 +85,8 @@
                         </svg>
                     </a>
                     <span class="p-1 rounded-full">$results->currentPage()</span>
-                    <a href="{{ $students->nextPageUrl() }}" class="p-1 bg-purple-900 rounded-full {{$student->lastPage() ? 'bg-opacity-50' : ''}}">
+                    <a href="{{ $students->nextPageUrl() }}"
+                        class="p-1 bg-purple-900 rounded-full {{ $student->lastPage() ? 'bg-opacity-50' : '' }}">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
