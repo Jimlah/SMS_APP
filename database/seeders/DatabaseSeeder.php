@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\Autorities;
 use App\Models\Student;
+use App\Models\Teacher;
+use App\Models\User;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
 
@@ -17,28 +19,37 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $faker = Factory::create();
-        $feature = [Autorities::STUDENT, Autorities::TEACHER, Autorities::GUARDIAN];
-        // \App\Models\User::factory(10)->create();
-        // for ($i = 1; $i <= 14; $i++) {
-        //     Autorities::create([
-        //         'user_id' => $i,
-        //         'feature' => $faker->randomElement($feature),
-        //         'viewAny' => $faker->numberBetween(0, 1),
-        //         'view' => $faker->numberBetween(0, 1),
-        //         'create' => $faker->numberBetween(0, 1),
-        //         'update' => $faker->numberBetween(0, 1),
-        //         'delete' => $faker->numberBetween(0, 1)
-        //     ]);
-        // }
 
-        // Student::create([
-        //     'firstname' => 'Abdullahi',
-        //     'lastname' => 'Jimoh',
-        //     'middlename' => 'Temidayo',
-        //     'date_of_birth' => now(),
-        //     'state_of_origin' => 'Oyo',
-        //     'nationality' => 'Nigeria',
-        //     'home_address' => '24, Amina Way'
-        // ]);
+        for ($i=0; $i < 10; $i++) { 
+            User::create([
+                'username' => $faker->userName(),
+                'email' => $faker->unique()->email(),
+                'password' => "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi"
+            ]);
+        }
+
+        for ($i = 0; $i < 100; $i++) {
+            # code...
+            Student::create([
+                'firstname' => $faker->firstName(),
+                'lastname' => $faker->lastName(),
+                'middlename' => $faker->firstName(),
+                'date_of_birth' => $faker->date(),
+                'state_of_origin' => $faker->state,
+                'nationality' => $faker->country,
+                'home_address' => $faker->streetAddress
+            ]);
+        }
+
+        for ($i = 0; $i < 20; $i++) {
+            # code...
+            Teacher::create([
+                'firstname' => $faker->firstName(),
+                'lastname' => $faker->lastName(),
+                'middlename' => $faker->firstName(),
+                'date_of_birth' => $faker->date(),
+                'phone_number' => $faker->phoneNumber
+            ]);
+        }
     }
 }

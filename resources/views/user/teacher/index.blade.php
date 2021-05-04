@@ -95,18 +95,18 @@
                     @endforelse
                 </tbody>
             </table>
-            @if ($students->hasPages())
+            @if ($students->hasMorePages())
                 <div class="flex items-center justify-start py-2">
-                    <a href="{{ $students->previousPageUrl() }}" class="p-1 bg-purple-900 rounded-full {{ $students->currentPage() === 1 ? 'hidden' : '' }}">
+                    <a href="{{ $students->previousPageUrl() }}" class="p-1 bg-purple-400 rounded-full">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
                             </path>
                         </svg>
                     </a>
-                    <span class="p-1 rounded-full">{{$students->currentPage()}} of {{$students->lastPage()}} </span>
+                    <span class="p-1 rounded-full">$results->currentPage()</span>
                     <a href="{{ $students->nextPageUrl() }}"
-                        class="p-1 bg-purple-900 rounded-full {{ $students->currentPage() === $students->lastPage() ? 'hidden' : '' }}">
+                        class="p-1 bg-purple-900 rounded-full {{ $student->lastPage() ? 'bg-opacity-50' : '' }}">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>

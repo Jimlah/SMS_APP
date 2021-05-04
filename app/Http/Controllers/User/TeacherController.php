@@ -3,10 +3,17 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 
 class TeacherController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Teacher::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +21,10 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        //
+        $teachers = Teacher::paginate(10);
+        return view('user.teacher.index', [
+            'teachers' => $teachers
+        ]);
     }
 
     /**
@@ -44,7 +54,7 @@ class TeacherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Teacher $teacher)
     {
         //
     }
@@ -55,7 +65,7 @@ class TeacherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Teacher $teacher)
     {
         //
     }
@@ -67,7 +77,7 @@ class TeacherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Teacher $teacher)
     {
         //
     }
@@ -78,7 +88,7 @@ class TeacherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Teacher $teacher)
     {
         //
     }

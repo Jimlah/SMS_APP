@@ -19,9 +19,9 @@ class StudentPolicy
      */
     public function before(User $user, $ability)
     {
-        // if ($user->id === 1) {
-        //     return true;
-        // }
+        if ($user->id === 1) {
+            return true;
+        }
     }
 
     /**
