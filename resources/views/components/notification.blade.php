@@ -54,7 +54,7 @@
 
 @if ($errors->any())
     @foreach ($errors->all() as $error)
-        <div class="flex items-center justify-start px-2 py-1 space-x-2 bg-red-500 bg-opacity-75 rounded-md ">
+        <div class="inline-flex items-center justify-end px-2 py-1 space-x-2 bg-red-500 bg-opacity-75 border-l-2 rounded-md w-max ">
             <span>
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
@@ -64,6 +64,13 @@
                 </svg>
             </span>
             <span>{{ $error }}</span>
+            <span>
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </span>
         </div>
     @endforeach
 @endif

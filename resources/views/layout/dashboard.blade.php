@@ -149,8 +149,8 @@
                         </svg>
                     </button>
 
-                    <div class="relative flex justify-center mt-2 text-lg">
-                        <div class="absolute flex flex-col space-y-2">
+                    <div class="relative flex justify-end mt-2 text-sm">
+                        <div class="absolute inline-flex flex-col items-end space-y-2">
                             @include('components.notification')
                         </div>
                     </div>

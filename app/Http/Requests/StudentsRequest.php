@@ -29,10 +29,10 @@ class StudentsRequest extends FormRequest
             'firstname' => 'required|string',
             'lastname' => 'required|string',
             'middlename' => 'required|string',
-            'date_of_birth' => 'required|date',
-            'nationality' => 'required|string',
-            'state_of_origin' => 'required|string',
-            'home_address' => 'required|string'
+            'date_of_birth' => 'date|nullable',
+            'nationality' => 'string|nullable',
+            'state_of_origin' => 'string|nullable',
+            'home_address' => 'string|nullable'
         ];
     }
 }
