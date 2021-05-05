@@ -20,9 +20,18 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $students = Student::paginate(10);
+        $students = Student::where('firstname', 'LIKE', "%{$request->q}%")
+            ->orWhere('lastname',  'LIKE', "%{$request->q}%")
+            ->orWhere('middlename',  'LIKE', "%{$request->q}%")
+            ->orWhere('email',  'LIKE', "%{$request->q}%")
+            ->orWhere('date_of_birth',  'LIKE', "%{$request->q}%")
+            ->orWhere('state_of_origin',  'LIKE', "%{$request->q}%")
+            ->orWhere('nationality',  'LIKE', "%{$request->q}%")
+            ->orWhere('home_address',  'LIKE', "%{$request->q}%")
+            ->paginate(10)
+            ->appends(['search' => 'q']);;
         return view('user.student.index', [
             'students' => $students
         ]);
@@ -49,7 +58,7 @@ class StudentController extends Controller
         Student::create($request->except('_token'));
 
         return redirect()->back()
-                ->with('success', 'You have Successfully added a new Student');
+            ->with('success', 'You have Successfully added a new Student');
     }
 
     /**
@@ -90,9 +99,9 @@ class StudentController extends Controller
         $student->update(
             $request->except(['_method', '_token'])
         );
-        
+
         return redirect()->back()
-                        ->with('success', 'You have update the student data');
+            ->with('success', 'You have update the student data');
     }
 
     /**

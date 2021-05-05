@@ -13,9 +13,13 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::paginate(10);
+        $users = User::where('username', 'LIKE', "%{$request->q}%")
+            ->orWhere('email',  'LIKE', "%{$request->q}%")
+            ->orWhere('roles',  'LIKE', "%{$request->q}%")
+            ->paginate(10)
+            ->appends(['search' => 'q']);
 
         return view('user.users.index', [
             'users' => $users
@@ -40,7 +44,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        
     }
 
     /**

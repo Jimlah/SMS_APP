@@ -19,9 +19,17 @@ class TeacherController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $teachers = Teacher::paginate(10);
+        $teachers = Teacher::where('firstname', 'LIKE', "%{$request->q}%")
+            ->orWhere('lastname',  'LIKE', "%{$request->q}%")
+            ->orWhere('middlename',  'LIKE', "%{$request->q}%")
+            ->orWhere('email',  'LIKE', "%{$request->q}%")
+            ->orWhere('date_of_birth',  'LIKE', "%{$request->q}%")
+            ->orWhere('phone_number',  'LIKE', "%{$request->q}%")
+            ->paginate(10)
+            ->appends(['search' => 'q']);
+            
         return view('user.teacher.index', [
             'teachers' => $teachers
         ]);
