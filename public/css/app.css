@@ -1049,6 +1049,9 @@ video {
 .font-bold {
 	font-weight: 700;
 }
+.uppercase {
+	text-transform: uppercase;
+}
 .text-gray-400 {
 	--tw-text-opacity: 1;
 	color: rgba(156, 163, 175, var(--tw-text-opacity));

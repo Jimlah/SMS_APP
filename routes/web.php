@@ -22,12 +22,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::resource('login', Login::class)->only(['index', 'store']);
-Route::get('/logout', [LogoutController::class, 'index']);
+Route::get('/logout', [LogoutController::class, 'index'])->name('logout');
 
 Route::resources([
     'teachers' => TeacherController::class,
     'students'=> StudentController::class,
-    'users' => UserController::class
 ]);
+
+Route::resource('users', UserController::class)->only('index');
 
 

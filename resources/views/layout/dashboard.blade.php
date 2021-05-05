@@ -56,7 +56,7 @@
                 </button>
                 <div class="">
                     <a href="" class="flex items-center space-x-1">
-                        <span>Abdullahi JImoh</span>
+                        <span>{{ucfirst(auth()->user()->username)}}</span>
                     </a>
                 </div>
             </div>
@@ -75,7 +75,7 @@
                     <div
                         class="flex flex-col items-center justify-center space-y-0.5 border-b border-gray-700 border-opacity-50 pb-2">
                         <img class="rounded-full h-14 w-14" src="{{ asset('test/user.jpg') }}" alt="">
-                        <span class="text-xs font-medium"> Admin </span>
+                        <span class="text-xs font-medium"> {{strtoupper(auth()->user()->roles)}}</span> </span>
                     </div>
                     <ul class="py-3 text-sm font-semibold">
                         <li class="my-2">
@@ -93,7 +93,7 @@
                             </a>
                         </li>
                         <li class="my-2">
-                            <a href=""
+                            <a href="{{ route('users.index') }}"
                                 class="flex justify-start space-x-3 active:text-purple-900 hover:text-purple-900">
                                 <span>
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -125,7 +125,7 @@
                     </ul>
                 </div>
 
-                <a href="/logout"
+                <a href="{{route('logout')}}"
                     class="flex items-center justify-start space-x-3 text-sm font-semibold active:text-purple-900 hover:text-purple-900">
                     <span>
                         <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"

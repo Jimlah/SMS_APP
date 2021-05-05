@@ -8,11 +8,6 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function __contruct()
-    {
-        $this->authorizeResource(User::class);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::paginate(10);
 
         return view('user.users.index', [
             'users' => $users
@@ -34,7 +29,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        echo "This is create";
+        // return view('user.users.create');
     }
 
     /**
@@ -45,7 +40,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        echo "This is store";
+        
     }
 
     /**

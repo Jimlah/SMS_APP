@@ -2,9 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\Autorities;
+use App\Models\Role;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -27,6 +26,7 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
+        'roles'
     ];
 
     /**
@@ -50,7 +50,7 @@ class User extends Authenticatable
 
     public function authorize($feature)
     {
-        return $this->hasMany(Autorities::class)
+        return $this->hasMany(Role::class)
                     ->where('feature', $feature)
                     ->get()
                     ->first();
