@@ -28,8 +28,8 @@ class StudentObserver
         $student->user_id = $user->id;
         $student->save();
 
-        Role::viewOnlyAndCreate($student->id, Role::FEATURE_STUDENTS);
-        Role::viewSingleOnly($student->id, Role::FEATURE_TEACHERS);
+        Role::viewOnlyCreate($user->id, Role::FEATURE_STUDENTS);
+        Role::viewSingleOnly($user->id, Role::FEATURE_TEACHERS);
 
     }
 

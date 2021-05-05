@@ -27,8 +27,8 @@ class TeacherObserver
         $teacher->user_id = $user->id;
         $teacher->save();
 
-        Role::viewAllOnly($teacher->id, Role::FEATURE_STUDENTS);
-        Role::viewSingleOnly($teacher->id, Role::FEATURE_TEACHERS);
+        Role::viewAllOnly($user->id, Role::FEATURE_STUDENTS);
+        Role::viewSingleOnly($user->id, Role::FEATURE_TEACHERS);
     }
 
     /**
