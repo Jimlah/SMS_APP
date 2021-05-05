@@ -6,6 +6,7 @@ use Faker\Factory;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Teacher;
+use Illuminate\Support\Str;
 
 class TeacherObserver
 {
@@ -18,11 +19,12 @@ class TeacherObserver
     public function created(Teacher $teacher)
     {
         $user = User::create([
-            'username' => $teacher->phone_number,
+            'username' => $teacher->firstname . $teacher->id . "t",
             'email' => $teacher->email,
             'password' => "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
             'email_verified_at' => now(),
-            'roles' => User::ROLE_TEACHER
+            'roles' => User::ROLE_TEACHER,
+            'remember_token' => Str::random(10),
         ]);
 
         $teacher->user_id = $user->id;

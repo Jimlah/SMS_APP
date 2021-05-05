@@ -6,6 +6,7 @@ use Faker\Factory;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Student;
+use Illuminate\Support\Str;
 
 class StudentObserver
 {
@@ -22,7 +23,8 @@ class StudentObserver
             'email' => $student->email,
             'password' => "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
             'email_verified_at' => now(),
-            'roles' => User::ROLE_STUDENT
+            'roles' => User::ROLE_STUDENT,
+            'remember_token' => Str::random(10),
         ]);
        
         $student->user_id = $user->id;
