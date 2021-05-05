@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use Faker\Factory;
+use App\Models\Role;
 use App\Models\User;
 use App\Models\Teacher;
 
@@ -25,6 +26,9 @@ class TeacherObserver
 
         $teacher->user_id = $user->id;
         $teacher->save();
+
+        Role::viewAllOnly($teacher->id, Role::FEATURE_STUDENTS);
+        Role::viewSingleOnly($teacher->id, Role::FEATURE_TEACHERS);
     }
 
     /**

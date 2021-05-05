@@ -16,12 +16,12 @@ class CreateTeachersTable extends Migration
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->string('firstname');
-            $table->string('lastname');
-            $table->string('middlename');
+            $table->string('firstname')->nullable();
+            $table->string('lastname')->nullable();
+            $table->string('middlename')->nullable();
             $table->string('email')->nullable();
-            $table->dateTime('date_of_birth');
-            $table->string('phone_number');
+            $table->dateTime('date_of_birth')->nullable();
+            $table->string('phone_number')->nullable();
             $table->timestamps();
         });
     }

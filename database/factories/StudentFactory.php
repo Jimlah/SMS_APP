@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Student;
+use Faker\Factory as FakerFactory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -22,14 +23,17 @@ class StudentFactory extends Factory
      */
     public function definition()
     {
+        $faker = FakerFactory::create();
+
         return [
-            'firstname' => 'Abdullahi',
-            'lastname' => 'Jimoh',
-            'middlename' => 'Temidayo',
-            'date_of_birth' => now(),
-            'state_of_origin' => 'Oyo',
-            'nationality' => 'Nigeria',
-            'home_address' => '24, Amina Way'
+            'firstname' => $faker->firstName(),
+            'lastname' => $faker->lastName(),
+            'middlename' => $faker->firstName(),
+            'email' => $faker->email(),
+            'date_of_birth' => $faker->date(),
+            'state_of_origin' => $faker->state,
+            'nationality' => $faker->country,
+            'home_address' => $faker->streetAddress
         ];
     }
 }

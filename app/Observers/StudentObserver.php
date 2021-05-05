@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use Faker\Factory;
+use App\Models\Role;
 use App\Models\User;
 use App\Models\Student;
 
@@ -23,9 +24,13 @@ class StudentObserver
             'password' => "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
             'roles' => User::ROLE_STUDENT
         ]);
-        
+       
         $student->user_id = $user->id;
         $student->save();
+
+        Role::viewOnlyAndCreate($student->id, Role::FEATURE_STUDENTS);
+        Role::viewSingleOnly($student->id, Role::FEATURE_TEACHERS);
+
     }
 
     /**

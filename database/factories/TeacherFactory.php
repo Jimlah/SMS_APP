@@ -2,7 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\Model;
+use App\Models\Teacher;
+use Faker\Factory as FakerFactory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TeacherFactory extends Factory
@@ -12,7 +13,7 @@ class TeacherFactory extends Factory
      *
      * @var string
      */
-    protected $model = Model::class;
+    protected $model = Teacher::class;
 
     /**
      * Define the model's default state.
@@ -21,8 +22,15 @@ class TeacherFactory extends Factory
      */
     public function definition()
     {
+        $faker = FakerFactory::create();
+
         return [
-            //
+            'firstname' => $faker->firstName(),
+            'lastname' => $faker->lastName(),
+            'middlename' => $faker->firstName(),
+            'email' => $faker->email(),
+            'date_of_birth' => $faker->date(),
+            'phone_number' => $faker->phoneNumber
         ];
     }
 }
