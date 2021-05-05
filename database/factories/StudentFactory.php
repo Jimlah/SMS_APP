@@ -29,11 +29,11 @@ class StudentFactory extends Factory
             'firstname' => $faker->firstName(),
             'lastname' => $faker->lastName(),
             'middlename' => $faker->firstName(),
-            'email' => $faker->unique()->email,
+            'email' => $faker->unique()->email(),
             'date_of_birth' => $faker->date(),
-            'state_of_origin' => $faker->state,
-            'nationality' => $faker->country,
-            'home_address' => $faker->streetAddress
+            'state_of_origin' => $faker->state(),
+            'nationality' => $faker->country(),
+            'home_address' => $faker->streetAddress()
         ];
     }
 }
