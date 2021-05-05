@@ -29,7 +29,7 @@ class StudentFactory extends Factory
             'firstname' => $faker->firstName(),
             'lastname' => $faker->lastName(),
             'middlename' => $faker->firstName(),
-            'email' => $faker->email(),
+            'email' => $faker->unique()->safeEmail(),
             'date_of_birth' => $faker->date(),
             'state_of_origin' => $faker->state,
             'nationality' => $faker->country,

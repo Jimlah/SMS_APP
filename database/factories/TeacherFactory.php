@@ -28,7 +28,7 @@ class TeacherFactory extends Factory
             'firstname' => $faker->firstName(),
             'lastname' => $faker->lastName(),
             'middlename' => $faker->firstName(),
-            'email' => $faker->email(),
+            'email' => $faker->unique()->safeEmail,
             'date_of_birth' => $faker->date(),
             'phone_number' => $faker->phoneNumber
         ];
