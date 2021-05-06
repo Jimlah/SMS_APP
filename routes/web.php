@@ -18,17 +18,24 @@ use App\Http\Controllers\User\UserController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware(['prevent.auth'])->group(function () {
+    
+    Route::get('/', function () {
+        return view('welcome');
+    });
+    
+    Route::resource('login', Login::class)->only(['index', 'store']);
 });
-Route::resource('login', Login::class)->only(['index', 'store']);
-Route::get('/logout', [LogoutController::class, 'index'])->name('logout');
-
-Route::resources([
-    'teachers' => TeacherController::class,
-    'students'=> StudentController::class,
-]);
-
-Route::resource('users', UserController::class)->only('index');
 
 
+Route::middleware(['auth'])->group(function () {
+    
+    Route::get('/logout', [LogoutController::class, 'index'])->name('logout');
+
+    Route::resources([
+        'teachers' => TeacherController::class,
+        'students' => StudentController::class,
+    ]);
+
+    Route::resource('users', UserController::class)->only('index');
+});

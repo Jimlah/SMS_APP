@@ -39,14 +39,15 @@ class Login extends Controller
     {
         $credentials = $request->only('username', 'password');
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, $request->only('remember_token'))) {
             $request->session()->regenerate();
 
-            return redirect()->intended(route('students.index'));
+            return redirect()->intended(route('students.index'))
+                ->with('success', 'You have Successfully Logged In');
         }
 
         return redirect(route('login.index'))
-                ->with('success', 'You have Successfully Logged In');
+            ->with('success', 'You have Successfully Logged In');
     }
 
     /**
