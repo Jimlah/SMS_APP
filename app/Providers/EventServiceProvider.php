@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
+use App\Listeners\LoginSuccessful;
 use App\Models\Student;
 use App\Models\Teacher;
 use App\Observers\StudentObserver;
 use App\Observers\TeacherObserver;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -22,6 +24,7 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        Login::class => [LoginSuccessful::class]
     ];
 
     /**

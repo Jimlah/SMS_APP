@@ -4,18 +4,27 @@ namespace App\Models;
 
 use App\Models\Role;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, LogsActivity;
 
     const ROLE_TEACHER = 'teacher';
     const ROLE_GUARDIAN = 'guardian';
     const ROLE_STUDENT = 'student';
     const ROLE_ADMIN = "admin";
     const ROLE_SUPER_ADMIN = "superadmin";
+
+    protected static $logAttributes = ['username', 'email', 'roles'];
+
+    protected static $ignoreChangedAttributes = ['password', 'updated_at'];
+
+    protected static $logOnlyDirty = true;
+
+    protected static $recordEvents = ['created', 'updated', 'deleted'];
 
     /**
      * The attributes that are mass assignable.
@@ -54,5 +63,10 @@ class User extends Authenticatable
                     ->where('feature', $feature)
                     ->get()
                     ->first();
+    }
+
+    public function getDescriptionForEvent(string $eventname)
+    {
+        return "You have {$eventname} a user";
     }
 }
