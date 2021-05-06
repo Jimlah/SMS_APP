@@ -19,7 +19,26 @@
     </style>
 </head>
 
-<body class="overflow-y-hidden bg-gray-100 dark:bg-gray-700">
+<body class="static overflow-y-hidden bg-gray-100 dark:bg-gray-700">
+    <div class="absolute z-50 flex items-center justify-center w-full h-screen bg-purple-900 preloader dark:bg-purple-300">
+
+        <svg width="500" height="500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"
+            preserveAspectRatio="xMidYMid" class="lds-ripple" style="background:0 0">
+            <circle cx="50" cy="50" r="4.719" fill="none" stroke="#1d3f72" stroke-width="2">
+                <animate attributeName="r" calcMode="spline" values="0;40" keyTimes="0;1" dur="3"
+                    keySplines="0 0.2 0.8 1" begin="-1.5s" repeatCount="indefinite" />
+                <animate attributeName="opacity" calcMode="spline" values="1;0" keyTimes="0;1" dur="3"
+                    keySplines="0.2 0 0.8 1" begin="-1.5s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="50" cy="50" r="27.591" fill="none" stroke="#5699d2" stroke-width="2">
+                <animate attributeName="r" calcMode="spline" values="0;40" keyTimes="0;1" dur="3"
+                    keySplines="0 0.2 0.8 1" begin="0s" repeatCount="indefinite" />
+                <animate attributeName="opacity" calcMode="spline" values="1;0" keyTimes="0;1" dur="3"
+                    keySplines="0.2 0 0.8 1" begin="0s" repeatCount="indefinite" />
+            </circle>
+        </svg>
+
+    </div>
     <div class="flex flex-col h-screen">
         <div
             class="flex items-center justify-between flex-none px-5 py-2 text-sm text-gray-400 bg-white dark:bg-gray-900">
@@ -56,7 +75,7 @@
                 </button>
                 <div class="">
                     <a href="" class="flex items-center space-x-1">
-                        <span>{{ucfirst(auth()->user()->username)}}</span>
+                        <span>{{ ucfirst(auth()->user()->username) }}</span>
                     </a>
                 </div>
             </div>
@@ -75,7 +94,7 @@
                     <div
                         class="flex flex-col items-center justify-center space-y-0.5 border-b border-gray-700 border-opacity-50 pb-2">
                         <img class="rounded-full h-14 w-14" src="{{ asset('test/user.jpg') }}" alt="">
-                        <span class="text-xs font-medium"> {{strtoupper(auth()->user()->roles)}}</span> </span>
+                        <span class="text-xs font-medium"> {{ strtoupper(auth()->user()->roles) }}</span> </span>
                     </div>
                     <ul class="py-3 text-sm font-semibold">
                         <li class="my-2">
@@ -125,7 +144,7 @@
                     </ul>
                 </div>
 
-                <a href="{{route('logout')}}"
+                <a href="{{ route('logout') }}"
                     class="flex items-center justify-start space-x-3 text-sm font-semibold active:text-purple-900 hover:text-purple-900">
                     <span>
                         <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -163,52 +182,68 @@
     </div>
     <script>
         document.getElementById('switchTheme').addEventListener('click', function() {
-            let htmlClasses = document.querySelector('html').classList;
-            let sun = document.getElementById('sun');
-            let moon = document.getElementById('moon');
-            if (localStorage.theme == 'dark') {
-                htmlClasses.remove('dark');
-                localStorage.removeItem('theme')
-            } else {
-                htmlClasses.add('dark');
-                localStorage.theme = 'dark';
-            }
-        });
-        if (localStorage.theme === 'dark' || (!'theme' in localStorage && window.matchMedia(
-                '(prefers-color-scheme: dark)').matches)) {
-            document.querySelector('html').classList.add('dark')
-        } else if (localStorage.theme === 'dark') {
-            document.querySelector('html').classList.add('dark')
-        }
+    let htmlClasses = document.querySelector('html').classList;
+    let sun = document.getElementById('sun');
+    let moon = document.getElementById('moon');
+    if (localStorage.theme == 'dark') {
+        htmlClasses.remove('dark');
+        localStorage.removeItem('theme')
+    } else {
+        htmlClasses.add('dark');
+        localStorage.theme = 'dark';
+    }
+});
+if (localStorage.theme === 'dark' || (!'theme' in localStorage && window.matchMedia(
+        '(prefers-color-scheme: dark)').matches)) {
+    document.querySelector('html').classList.add('dark')
+} else if (localStorage.theme === 'dark') {
+    document.querySelector('html').classList.add('dark')
+}
 
-        function changeTheme() {
-            return {
-                show: false,
-                open() {
-                    this.show = !this.show
-                },
-                change() {
-                    return this.show
-                }
-            }
+function changeTheme() {
+    return {
+        show: false,
+        open() {
+            this.show = !this.show
+        },
+        change() {
+            return this.show
         }
+    }
+}
 
-        function openNav() {
-            return {
-                nav: false,
-                open() {
-                    console.log(this.nav)
-                    this.nav = true
-                },
-                close() {
-                    this.nav = false
-                },
-                isOpen() {
-                    return this.nav
-                }
-            }
+function openNav() {
+    return {
+        nav: false,
+        open() {
+            console.log(this.nav)
+            this.nav = true
+        },
+        close() {
+            this.nav = false
+        },
+        isOpen() {
+            return this.nav
         }
+    }
+}
 
+const preloader = document.querySelector('.preloader');
+
+const fadeEffect = setInterval(() => {
+    // if we don't set opacity 1 in CSS, then   //it will be equaled to "", that's why we   // check it
+    if (!preloader.style.opacity) {
+        preloader.style.opacity = 1;
+    }
+    if (preloader.style.opacity > 0) {
+        preloader.style.opacity -= 0.1;
+    } else {
+        clearInterval(fadeEffect);
+        preloader.classList.add('hidden');
+    }
+}, 200);
+
+window.addEventListener('load', ()=>fadeEffect);
     </script>
 </body>
 
