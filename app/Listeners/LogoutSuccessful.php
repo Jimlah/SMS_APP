@@ -2,13 +2,11 @@
 
 namespace App\Listeners;
 
-use Illuminate\Auth\Events\Login;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Auth\Events\Logout;
 use Illuminate\Queue\InteractsWithQueue;
-use Spatie\Activitylog\ActivityLogger;
-use Spatie\Activitylog\Models\Activity;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
-class LoginSuccessful
+class LogoutSuccessful
 {
     /**
      * Create the event listener.
@@ -23,13 +21,13 @@ class LoginSuccessful
     /**
      * Handle the event.
      *
-     * @param  Login  $event
+     * @param  Logout  $event
      * @return void
      */
-    public function handle(Login $event)
+    public function handle(Logout $event)
     {
-        $event->subject = 'login';
-        $event->description = "login Successfull";
+        $event->subject = 'logout';
+        $event->description = "logout Successfull";
 
         activity($event->subject)
             ->by($event->user)

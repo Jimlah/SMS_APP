@@ -1,11 +1,12 @@
 <?php
 
 use App\Http\Controllers\Auth\Login;
-use App\Http\Controllers\Auth\LogoutController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\User\LogsActivityController;
 use App\Http\Controllers\User\StudentController;
 use App\Http\Controllers\User\TeacherController;
-use App\Http\Controllers\User\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,4 +39,6 @@ Route::middleware(['auth'])->group(function () {
     ]);
 
     Route::resource('users', UserController::class)->only('index');
+
+    Route::resource('logsActivity', LogsActivityController::class);
 });

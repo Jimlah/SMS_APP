@@ -20,7 +20,8 @@
 </head>
 
 <body class="static overflow-y-hidden bg-gray-100 dark:bg-gray-700">
-    <div class="absolute z-50 flex items-center justify-center w-full h-screen bg-purple-900 preloader dark:bg-purple-300">
+    <div
+        class="absolute z-50 flex items-center justify-center w-full h-screen bg-purple-900 preloader dark:bg-purple-300">
 
         <svg width="500" height="500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"
             preserveAspectRatio="xMidYMid" class="lds-ripple" style="background:0 0">
@@ -141,6 +142,24 @@
                                 </a>
                             </li>
                         @endcan
+
+                        @if (auth()->user()->roles === 'superadmin' || auth()->user()->roles === 'admin')
+                            <li class="my-2">
+                                <a href="{{ route('logsActivity.index') }}"
+                                    class="flex justify-start space-x-3 active:text-purple-900 hover:text-purple-900">
+                                    <span>
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z">
+                                            </path>
+                                        </svg>
+                                    </span>
+                                    <span>Activity Log</span>
+                                </a>
+                            </li>
+                        @endif
+
                     </ul>
                 </div>
 
@@ -182,68 +201,69 @@
     </div>
     <script>
         document.getElementById('switchTheme').addEventListener('click', function() {
-    let htmlClasses = document.querySelector('html').classList;
-    let sun = document.getElementById('sun');
-    let moon = document.getElementById('moon');
-    if (localStorage.theme == 'dark') {
-        htmlClasses.remove('dark');
-        localStorage.removeItem('theme')
-    } else {
-        htmlClasses.add('dark');
-        localStorage.theme = 'dark';
-    }
-});
-if (localStorage.theme === 'dark' || (!'theme' in localStorage && window.matchMedia(
-        '(prefers-color-scheme: dark)').matches)) {
-    document.querySelector('html').classList.add('dark')
-} else if (localStorage.theme === 'dark') {
-    document.querySelector('html').classList.add('dark')
-}
-
-function changeTheme() {
-    return {
-        show: false,
-        open() {
-            this.show = !this.show
-        },
-        change() {
-            return this.show
+            let htmlClasses = document.querySelector('html').classList;
+            let sun = document.getElementById('sun');
+            let moon = document.getElementById('moon');
+            if (localStorage.theme == 'dark') {
+                htmlClasses.remove('dark');
+                localStorage.removeItem('theme')
+            } else {
+                htmlClasses.add('dark');
+                localStorage.theme = 'dark';
+            }
+        });
+        if (localStorage.theme === 'dark' || (!'theme' in localStorage && window.matchMedia(
+                '(prefers-color-scheme: dark)').matches)) {
+            document.querySelector('html').classList.add('dark')
+        } else if (localStorage.theme === 'dark') {
+            document.querySelector('html').classList.add('dark')
         }
-    }
-}
 
-function openNav() {
-    return {
-        nav: false,
-        open() {
-            console.log(this.nav)
-            this.nav = true
-        },
-        close() {
-            this.nav = false
-        },
-        isOpen() {
-            return this.nav
+        function changeTheme() {
+            return {
+                show: false,
+                open() {
+                    this.show = !this.show
+                },
+                change() {
+                    return this.show
+                }
+            }
         }
-    }
-}
 
-const preloader = document.querySelector('.preloader');
+        function openNav() {
+            return {
+                nav: false,
+                open() {
+                    console.log(this.nav)
+                    this.nav = true
+                },
+                close() {
+                    this.nav = false
+                },
+                isOpen() {
+                    return this.nav
+                }
+            }
+        }
 
-const fadeEffect = setInterval(() => {
-    // if we don't set opacity 1 in CSS, then   //it will be equaled to "", that's why we   // check it
-    if (!preloader.style.opacity) {
-        preloader.style.opacity = 1;
-    }
-    if (preloader.style.opacity > 0) {
-        preloader.style.opacity -= 0.1;
-    } else {
-        clearInterval(fadeEffect);
-        preloader.classList.add('hidden');
-    }
-}, 200);
+        const preloader = document.querySelector('.preloader');
 
-window.addEventListener('load', ()=>fadeEffect);
+        const fadeEffect = setInterval(() => {
+            // if we don't set opacity 1 in CSS, then   //it will be equaled to "", that's why we   // check it
+            if (!preloader.style.opacity) {
+                preloader.style.opacity = 1;
+            }
+            if (preloader.style.opacity > 0) {
+                preloader.style.opacity -= 0.1;
+            } else {
+                clearInterval(fadeEffect);
+                preloader.classList.add('hidden');
+            }
+        }, 200);
+
+        window.addEventListener('load', () => fadeEffect);
+
     </script>
 </body>
 
