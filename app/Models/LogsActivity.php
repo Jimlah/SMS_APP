@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Activitylog\Traits\LogsActivity as TraitsLogsActivity;
 
 class LogsActivity extends Model
 {
-    use HasFactory, LogsActivity;
+    use HasFactory, TraitsLogsActivity;
 
     protected $table = 'activity_log';
 
