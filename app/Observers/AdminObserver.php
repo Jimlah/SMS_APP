@@ -7,7 +7,7 @@ use App\Models\User;
 use App\Models\Admin;
 use Illuminate\Support\Str;
 
-class AdminObservers
+class AdminObserver
 {
     /**
      * Handle the Admin "created" event.
