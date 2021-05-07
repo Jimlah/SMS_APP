@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use App\Models\Role;
+use App\Models\Admin;
+use App\Models\Teacher;
+use App\Models\Guardian;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -13,11 +16,10 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable, LogsActivity;
 
-    const ROLE_TEACHER = 'teacher';
-    const ROLE_GUARDIAN = 'guardian';
-    const ROLE_STUDENT = 'student';
-    const ROLE_ADMIN = "admin";
-    const ROLE_SUPER_ADMIN = "superadmin";
+    const ROLE_TEACHER = Teacher::class;
+    const ROLE_GUARDIAN = Guardian::class;
+    const ROLE_STUDENT = Student::class;
+    const ROLE_ADMIN = Admin::class;
 
     protected static $logAttributes = ['username', 'email', 'roles'];
 
