@@ -17,9 +17,7 @@ class LogsActivityController extends Controller
      */
     public function index()
     {
-        $activity = LogsActivity::all();
-
-        dd(User::find(2)->authorize('students')->get());
+        $activity = LogsActivity::pagiante();
 
         return view('user.LogsActivities.index',[
             'activities' => $activity
