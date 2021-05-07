@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Models\User;
+use App\Models\LogsActivity;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\LogsActivity;
 
 class LogsActivityController extends Controller
 {
@@ -18,7 +19,7 @@ class LogsActivityController extends Controller
     {
         $activity = LogsActivity::all();
 
-        dd($activity[24]->feature());
+        dd(User::find(2)->authorize('students')->get());
 
         return view('user.LogsActivities.index',[
             'activities' => $activity

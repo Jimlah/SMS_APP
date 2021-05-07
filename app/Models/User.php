@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Role;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -60,13 +61,21 @@ class User extends Authenticatable
     public function authorize($feature)
     {
         return $this->hasMany(Role::class)
-                    ->where('feature', $feature)
-                    ->get()
-                    ->first();
+                    ->where('feature', $feature);
     }
 
     public function getDescriptionForEvent(string $eventname)
     {
         return "You have {$eventname} a user";
+    }
+
+    /**
+     * Get the profile associated with the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function profile(): HasOne
+    {
+        return $this->hasOne(Student::class);
     }
 }
