@@ -18,6 +18,8 @@ class LogsActivityController extends Controller
     {
         $activity = LogsActivity::all();
 
+        dd($activity[24]->feature());
+
         return view('user.LogsActivities.index',[
             'activities' => $activity
         ]);
