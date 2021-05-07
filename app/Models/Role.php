@@ -9,11 +9,11 @@ class Role extends Model
 {
     use HasFactory;
 
-    const FEATURE_STUDENTS = 'students';
-    const FEATURE_TEACHERS = 'teachers';
-    const FEATURE_GUARDIANS = 'guardians';
-    const FEATURE_ROLES = 'roles';
-    const FEATURE_USERS = 'users';
+    const FEATURE_ROLES = Self::class;
+    const FEATURE_USERS = User::class;
+    const FEATURE_TEACHERS = Teacher::class;
+    const FEATURE_STUDENTS = Student::class;
+    const FEATURE_GUARDIANS = Guardian::class;
 
     /**
      * The attributes that are mass assignable.
