@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
-    use HasFactory;
+    use HasFactory, LogsActivity;
 
     const FEATURE_ROLES = Self::class;
     const FEATURE_USERS = User::class;
@@ -29,7 +29,26 @@ class Role extends Model
         'update',
         'delete'
     ];
-    
+
+    protected static $logAttributes = [
+        'user_id',
+        'firstname',
+        'lastname',
+        'middlename',
+        'email',
+        'date_of_birth',
+        'phone_number'
+    ];
+
+    protected static $logOnlyDirty = true;
+
+    protected static $recordEvents = ['created', 'updated', 'deleted'];
+
+    public function getDescriptionForEvent(string $eventname)
+    {
+        return "You have {$eventname} a student";
+    }
+
     /**
      * user_roles
      * return the authorizations of users on each features
@@ -40,7 +59,7 @@ class Role extends Model
     {
         return $this->belongsTo(User::class);
     }
-    
+
     /**
      * viewAllOnly
      * able to view all data only
@@ -56,14 +75,14 @@ class Role extends Model
             'feature' => $feature,
             'viewAny' => true,
             'view' => true,
-            'create'=> false,
+            'create' => false,
             'update' => false,
-            'delete'=> false
+            'delete' => false
         ]);
 
         return $result;
     }
-    
+
     /**
      * viewSingleOnly
      * able to view a single file only
@@ -79,14 +98,14 @@ class Role extends Model
             'feature' => $feature,
             'viewAny' => false,
             'view' => true,
-            'create'=> false,
+            'create' => false,
             'update' => false,
-            'delete'=> false
+            'delete' => false
         ]);
 
         return $result;
     }
-    
+
     /**
      * viewAllAndCreate
      * able to view all and perform all CRUD operations except delete
@@ -102,14 +121,14 @@ class Role extends Model
             'feature' => $feature,
             'viewAny' => true,
             'view' => true,
-            'create'=> true,
+            'create' => true,
             'update' => true,
-            'delete'=> false,
+            'delete' => false,
         ]);
 
         return $result;
     }
-    
+
     /**
      * viewOnlyCreate
      * able to view a single file and perform CRUD operations except delete on that file
@@ -125,14 +144,14 @@ class Role extends Model
             'feature' => $feature,
             'viewAny' => false,
             'view' => true,
-            'create'=> true,
+            'create' => true,
             'update' => true,
-            'delete'=> false
+            'delete' => false
         ]);
 
         return $result;
     }
-    
+
     /**
      * viewAllAndDelete
      * Able to view all and perform all CRUD operations
@@ -148,14 +167,14 @@ class Role extends Model
             'feature' => $feature,
             'viewAny' => true,
             'view' => true,
-            'create'=> true,
+            'create' => true,
             'update' => true,
-            'delete'=> true
+            'delete' => true
         ]);
 
         return $result;
     }
-    
+
     /**
      * viewOnlyAndDelete
      * able to view a single data and perform crud operations on it
@@ -171,9 +190,9 @@ class Role extends Model
             'feature' => $feature,
             'viewAny' => false,
             'view' => true,
-            'create'=> true,
+            'create' => true,
             'update' => true,
-            'delete'=> true
+            'delete' => true
         ]);
 
         return $result;
