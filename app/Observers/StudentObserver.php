@@ -19,7 +19,7 @@ class StudentObserver
     public function created(Student $student)
     {
         $user = User::create([
-            'username' => $student->firstname . $student->id,
+            'username' => $student->firstname . $student->id . "_student", 
             'email' => $student->email,
             'password' => "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
             'email_verified_at' => now(),

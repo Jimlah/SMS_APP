@@ -2,16 +2,16 @@
 
 namespace App\Providers;
 
-// use App\Models\Admin;
+use App\Models\Admin;
 use App\Models\Student;
 use App\Models\Teacher;
-// use App\Models\Guardian;
-// use App\Observers\AdminObserver;
+use App\Models\Guardian;
+use App\Observers\AdminObserver;
 use Illuminate\Auth\Events\Login;
 use App\Listeners\LoginSuccessful;
 use App\Observers\StudentObserver;
 use App\Observers\TeacherObserver;
-// use App\Observers\GuardianObserver;
+use App\Observers\GuardianObserver;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -38,9 +38,9 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Admin::observe(AdminObserver::class);
+        Admin::observe(AdminObserver::class);
         Student::observe(StudentObserver::class);
         Teacher::observe(TeacherObserver::class);
-        // Guardian::observe(GuardianObserver::class);
+        Guardian::observe(GuardianObserver::class);
     }
 }

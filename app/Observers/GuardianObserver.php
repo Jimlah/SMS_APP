@@ -6,6 +6,7 @@ use App\Models\Role;
 use App\Models\User;
 use App\Models\Guardian;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 class GuardianObserver
 {
@@ -18,9 +19,9 @@ class GuardianObserver
     public function created(Guardian $guardian)
     {
         $user = User::create([
-            'username' => $guardian->firstname . $guardian->id,
+            'username' => $guardian->firstname . $guardian->id . "_guardian",
             'email' => $guardian->email,
-            'password' => "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+            'password' => env('USER_PASSWORD', Hash::make(Str::random(8))),
             'email_verified_at' => now(),
             'roles' => User::ROLE_GUARDIAN,
             'remember_token' => Str::random(10),
